@@ -18,8 +18,10 @@
 | Pemeriksaan | Status | Bukti |
 |---|---|---|
 | Konfigurasi SonarQube dan workflow ada | PASS | `sonar-project.properties` dan `.github/workflows/sonarqube.yml` |
-| Validasi pipeline GitHub Actions | NOT RUN | Belum ada run Actions setelah konfigurasi dibuat |
+| Validasi pipeline GitHub Actions | FAIL | Run `42973329729` gagal pada checkout source private karena `PERPUS_SOURCE_TOKEN` belum disetel; Flutter analyzer, test, dan scan belum berjalan |
 | Analisis di server SonarQube | BLOCKED | URL server dan token project belum tersedia di GitHub Actions |
 | Screenshot dashboard hasil analisis | NOT RUN | Ambil setelah scan berhasil |
+
+Untuk membuka blocker, tambahkan secret `PERPUS_SOURCE_TOKEN` dengan izin read-only `Contents` pada repo `apps-perpus`, secret `SONAR_TOKEN`, dan variable `SONAR_HOST_URL`. Setelah itu jalankan ulang workflow dan ganti status berdasarkan run baru.
 
 Status PASS pada konfigurasi hanya membuktikan file implementasi tersedia; bukan bukti scan SonarQube berhasil.

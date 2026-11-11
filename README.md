@@ -1,6 +1,6 @@
 # Implementasi SonarQube untuk Perpus
 
-Repositori ini menyimpan konfigurasi analisis. Source aplikasi tetap berada di [`rezhazha41/apps-perpus`](https://github.com/rezhazha41/apps-perpus); workflow mengambil branch `main` dari repo tersebut saat dijalankan, lalu menjalankan Flutter analyzer, test dengan coverage LCOV, dan SonarQube.
+Repositori ini menyimpan konfigurasi analisis. Source aplikasi tetap berada di repo private [`rezhazha41/apps-perpus`](https://github.com/rezhazha41/apps-perpus); workflow mengambil branch `main` saat dijalankan, lalu menjalankan Flutter analyzer, test dengan coverage LCOV, dan SonarQube. Workflow tidak menyalin source aplikasi ke repo tugas publik.
 
 ## Yang dianalisis
 
@@ -18,10 +18,10 @@ Repositori ini menyimpan konfigurasi analisis. Source aplikasi tetap berada di [
 4. Pada repository ini, tambahkan:
    - Actions variable `SONAR_HOST_URL` berisi URL server SonarQube, tanpa slash di akhir.
    - Actions secret `SONAR_TOKEN` berisi token project.
-5. Pastikan source repository `rezhazha41/apps-perpus` publik atau sediakan akses checkout read-only yang sesuai. Workflow saat ini hanya mengandalkan akses publik.
+5. Tambahkan Actions secret `PERPUS_SOURCE_TOKEN` berupa fine-grained token read-only yang hanya memiliki akses **Contents: read** ke repo private `apps-perpus`.
 6. Push ke `main` atau jalankan workflow **Flutter static analysis (SonarQube)** secara manual dari tab Actions.
 
-> **Penting:** jangan menaruh token di file, commit, workflow input, atau log. Token hanya disimpan sebagai GitHub Actions Secret. Jangan gunakan service-role key Supabase sebagai token SonarQube.
+> **Penting:** simpan `PERPUS_SOURCE_TOKEN` dan `SONAR_TOKEN` hanya sebagai GitHub Actions Secrets; jangan menaruh token di file, commit, workflow input, atau log. Jangan gunakan service-role key Supabase sebagai token SonarQube.
 
 ## Cara membaca hasil
 
